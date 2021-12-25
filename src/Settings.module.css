@@ -1,0 +1,52 @@
+input .error {
+    background-color: #99727c;
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.paramWrapper {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 200px;
+    /*border: 1px solid yellow;*/
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #8ecccc;
+    align-items: center;
+}
+
+.settingsInvisible {
+    /*z-index: -1;*/
+    transition-duration: 1000ms;
+    transform: translate(0px, 140px);
+    /*box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
+}
+
+.settingsVisible {
+    transition-duration: 700ms;
+    transform: translate(0px, 0px);
+    /*box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);*/
+}
+
+.hidden {
+    /*visibility: hidden;*/
+    max-height: 0;
+    overflow: hidden;
+}
+
+.slowlyHide {
+    /*overflow: hidden;*/
+    max-height: 0;
+    transition: max-height 0.9s ease-out;
+}
+
+.showHidden {
+    max-height: 500px;
+    transition: max-height 0.9s ease-out;
+}
