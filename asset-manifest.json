@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/tuesday-counter-app/static/css/main.df56abd1.chunk.css",
+    "main.js": "/tuesday-counter-app/static/js/main.9154f30a.chunk.js",
+    "main.js.map": "/tuesday-counter-app/static/js/main.9154f30a.chunk.js.map",
+    "runtime-main.js": "/tuesday-counter-app/static/js/runtime-main.e80d6475.js",
+    "runtime-main.js.map": "/tuesday-counter-app/static/js/runtime-main.e80d6475.js.map",
+    "static/js/2.0f7b3b7d.chunk.js": "/tuesday-counter-app/static/js/2.0f7b3b7d.chunk.js",
+    "static/js/2.0f7b3b7d.chunk.js.map": "/tuesday-counter-app/static/js/2.0f7b3b7d.chunk.js.map",
+    "static/js/3.51caabba.chunk.js": "/tuesday-counter-app/static/js/3.51caabba.chunk.js",
+    "static/js/3.51caabba.chunk.js.map": "/tuesday-counter-app/static/js/3.51caabba.chunk.js.map",
+    "index.html": "/tuesday-counter-app/index.html",
+    "static/css/main.df56abd1.chunk.css.map": "/tuesday-counter-app/static/css/main.df56abd1.chunk.css.map",
+    "static/js/2.0f7b3b7d.chunk.js.LICENSE.txt": "/tuesday-counter-app/static/js/2.0f7b3b7d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e80d6475.js",
+    "static/js/2.0f7b3b7d.chunk.js",
+    "static/css/main.df56abd1.chunk.css",
+    "static/js/main.9154f30a.chunk.js"
+  ]
+}
