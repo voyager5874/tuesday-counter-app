@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import styled from "styled-components";
 
 
@@ -33,7 +33,7 @@ export const LimitValueInput = (props: LimitValueInput) => {
 
     return (
         <LimitValueSetContainer>
-            <label style={{paddingRight: "40px", marginRight: "10px"}}>{props.label}</label>
+            <Label>{props.label}</Label>
             {/*<Input value={props.currentValue} type="number" min={"0"} onChange={newValueHandler}/>*/}
             <LimitInputField><span
                 style={{
@@ -134,7 +134,7 @@ const LimitInputField = styled.div`
   justify-content: center;
   //align-items: center; //couldn't position pseudo-element in the right place so I went with some workarounds
   outline: none;
-  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;;
+  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
 
   &::after { //"::" - pseudo element, ":" - pseudo-class
     content: '';
@@ -146,5 +146,13 @@ const LimitInputField = styled.div`
     background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
     border-radius: 5px 5px 0 0;
   }
+`
+
+const Label = styled.label`
+  text-shadow: 0 0 3px #fff;
+
+  paddingRight: 40px;
+  marginRight: 10px;
+
 `
 

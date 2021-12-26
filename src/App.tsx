@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import s from "./App.module.css";
 import {MainDisplay} from "./MainDisplay";
 import {Button} from "./Button";
 import {Settings} from "./Settings";
@@ -8,12 +7,8 @@ import styled from "styled-components";
 
 function App() {
 
-    //BLL should be placed in localStorage to imitate server data ?
-    // let MIN_VALUE = 0;
-    // let MAX_VALUE = 5;
 
-    // const [limits, setLimits] = useState<Array<number>>([0, 1])
-    const [tempLimitsValues, setTempLimitsValues] = useState<Array<number>>([0, 0]) //how do I use set if inputs for max/min live in another component?
+    const [tempLimitsValues, setTempLimitsValues] = useState<Array<number>>([0, 0])
 
     const [minValue, setMinValue] = useState<number>(0)
     const [maxValue, setMaxValue] = useState<number>(5)
@@ -21,6 +16,24 @@ function App() {
     const [counter, setCounter] = useState<number>(minValue)
     const [error, setError] = useState('')
     const [paramsVisible, setParamsVisible] = useState(false)
+
+
+    useEffect(() => {
+        debugger
+        let maxAsString = localStorage.getItem('maxValue')
+        if (maxAsString) {
+            setMaxValue(JSON.parse(maxAsString))
+        }
+        let minAsString = localStorage.getItem('minValue')
+        if (minAsString) {
+            setMinValue(JSON.parse(minAsString))
+        }
+        let counterValueAsString = localStorage.getItem('counterValue')
+        if (counterValueAsString) {
+            setCounter(JSON.parse(counterValueAsString))
+        }
+
+    }, [])
 
     const incrementCounter = () => {
         debugger
@@ -34,33 +47,30 @@ function App() {
     }
 
     const resetCounter = () => {
-        setCounter(minValue) //no rerender if min have not changed
+        setCounter(minValue)
     }
     const setLimitsHandler = () => {
         if (paramsVisible) {
-            // MIN_VALUE = minValue
-            // MAX_VALUE = maxValue
             setMaxValue(tempLimitsValues[0])
             setMinValue(tempLimitsValues[1])
-            localStorage.setItem('maxValue', JSON.stringify(maxValue))
-            localStorage.setItem('minValue', JSON.stringify(minValue))
             setError('')
             setParamsVisible(false)
-            // resetCounter()
+            resetCounter()
         } else {
             setParamsVisible(true)
         }
     }
     const changeTempLocalState = (max: number, min: number) => {
-        // if(max > )
         setTempLimitsValues([max, min])
     }
 
     useEffect(() => {
-        resetCounter()
-    }, [maxValue, minValue])
+        localStorage.setItem('maxValue', JSON.stringify(maxValue))
+        localStorage.setItem('minValue', JSON.stringify(minValue))
+        // resetCounter()
+        localStorage.setItem('counterValue', JSON.stringify(counter))
+    }, [maxValue, minValue, counter])
 
-    // let mainDisplayClassName = `${counter === maxValue ? s.limitReached : ""} ${error ? s.errorMessage : ""}`
 
     return (
         <CounterWrapper>

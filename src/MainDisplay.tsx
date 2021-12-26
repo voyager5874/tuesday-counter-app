@@ -1,5 +1,4 @@
-import styles from "./Indicator.module.css"
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 
 type IndicatorPropsType = {
@@ -13,7 +12,6 @@ type IndicatorPropsType = {
 
 }
 export const MainDisplay = (props: IndicatorPropsType) => {
-    // const[error, setError] = useState('')
     return (
         <Display error={props.error}>
             <DisplayMainValue error={props.error} limitReached={props.finish}>

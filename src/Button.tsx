@@ -12,10 +12,8 @@ export const Button = (props: ButtonType) => {
         props.callback();
     }
     return (
-        // <button className={styles.deepskyblueButton} onClick={onClickHandler}>{props.name}</button>
         <BlueButton
             disabled={props.disabled}
-            // className={`${props.disabled ? styles.disabled : ""}`}
             onClick={onClickHandler}>{props.name}</BlueButton>
     )
 }
