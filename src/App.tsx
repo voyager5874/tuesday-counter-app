@@ -52,7 +52,7 @@ function App() {
         }
     }
     const changeTempLocalState = (max: number, min: number) => {
-        debugger
+        // if(max > )
         setTempLimitsValues([max, min])
     }
 
@@ -71,6 +71,7 @@ function App() {
                       limitsChangedCallback={(max, min) => {
                           changeTempLocalState(max, min)
                       }}
+                      setErrorCallback={setError}
             />
             <MainBoardWrapper>
                 <MainDisplay mainValue={counter} error={error} value1={maxValue} value2={minValue} value1Label={"max"}

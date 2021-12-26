@@ -8,8 +8,7 @@ type SettingsPropsType = {
     visible: boolean
     maxValue: number
     minValue: number
-    // minChangedCallback: (newValue: number) => void
-    // maxChangedCallback: (newValue: number) => void
+    setErrorCallback: (error: string) => void
     limitsChangedCallback: (newMax: number, newMin: number) => void
 }
 
@@ -17,31 +16,25 @@ export const Settings = (props: SettingsPropsType) => {
 
     const [minValue, setMinValue] = useState<number>(props.minValue)
     const [maxValue, setMaxValue] = useState<number>(props.maxValue)
-    const [error, setError] = useState<boolean>(false)
 
     const validateNewMax = (newMax: number) => {
-
-        if (newMax > minValue) {
-            setError(false)
+        if (newMax > minValue && newMax > 0) {
+            props.setErrorCallback('')
             setMaxValue(newMax)
-            // limitsChangedHandler()
         } else {
-            setError(true)
+            newMax <= minValue ? props.setErrorCallback(`max can't be less than min`) : props.setErrorCallback(`negative values not allowed`)
+            setTimeout(() => props.setErrorCallback(''), 1000)
         }
     }
+
     const validateNewMin = (newMin: number) => {
-        if (newMin < maxValue) {
-            setError(false)
+        if (newMin < maxValue && newMin >= 0) {
+            props.setErrorCallback('')
             setMinValue(newMin)
-            // limitsChangedHandler()
-
         } else {
-            setError(true)
+            newMin >= maxValue ? props.setErrorCallback(`max can't be less than min`) : props.setErrorCallback(`negative values not allowed`)
+            setTimeout(() => props.setErrorCallback(''), 1000)
         }
-    }
-
-    const limitsChangedHandler = () => {
-        props.limitsChangedCallback(maxValue, minValue)
     }
 
     useEffect(() => {
