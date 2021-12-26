@@ -48,26 +48,19 @@ export const Settings = (props: SettingsPropsType) => {
         props.limitsChangedCallback(maxValue, minValue)
     }, [maxValue, minValue])
 
-    let settingsClassName = `${props.visible ? s.settingsVisible : s.settingsInvisible}`
+    let visibility = `${props.visible ? s.settingsVisible : s.settingsInvisible}`
     // let settingsClassName = `${s.settingsVisible} ${s.settingsWrapper}`
     // let settingsClassName = `${s.settingsWrapper}`
     // let settingsClassName = `${props.visible ? s.showHidden : s.slowlyHide} ${s.settingsWrapper}`
+    //how to make slider animation with styled components??
 
 
     return (
-        <SettingsWrapper className={settingsClassName}>
+        <SettingsWrapper className={visibility}>
             <LimitValueInput label={"max value"} currentValue={maxValue}
                              callback={(newValue) => validateNewMax(newValue)}/>
             <LimitValueInput label={"min value"} currentValue={minValue}
                              callback={(newValue) => validateNewMin(newValue)}/>
-            {/*<div className={s.paramWrapper}>*/}
-            {/*    <label>min value</label>*/}
-            {/*    <input value={minValue} type="number" min={"0"} onChange={validateNewMin}/>*/}
-            {/*    <div className={s.buttonContainer}>*/}
-            {/*        <button className={s.settingsButton}>+</button>*/}
-            {/*        <button className={s.settingsButton}>-</button>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
         </SettingsWrapper>
     );
 };
@@ -86,7 +79,8 @@ const SettingsWrapper = styled.div`
   border: 3px solid #8ecccc;
   border-bottom: none;
   border-radius: 10px 10px 0 0;
-  box-shadow: 0 4px 8px 0 rgb(33, 33, 33), 0 6px 20px 0 rgb(33, 33, 33);
+  //box-shadow: 0 4px 8px 0 rgb(33, 33, 33), 0 6px 20px 0 rgb(33, 33, 33);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   /*max-height: 0;*/
   /*overflow: hidden;*/
 `

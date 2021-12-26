@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import s from "./App.module.css";
-import {Indicator} from "./Indicator";
+import {MainDisplay} from "./MainDisplay";
 import {Button} from "./Button";
 import {Settings} from "./Settings";
 import styled from "styled-components";
@@ -60,7 +60,7 @@ function App() {
         resetCounter()
     }, [maxValue, minValue])
 
-    let mainDisplayClassName = `${counter === maxValue ? s.limitReached : ""} ${error ? s.errorMessage : ""}`
+    // let mainDisplayClassName = `${counter === maxValue ? s.limitReached : ""} ${error ? s.errorMessage : ""}`
 
     return (
         <CounterWrapper>
@@ -72,18 +72,10 @@ function App() {
                           changeTempLocalState(max, min)
                       }}
             />
-            <div className={s.mainBoardWrapper}>
-                {/*<Indicator value={counter}/>*/}
-                <CounterDisplay>
-                    <CounterDisplayMainValue className={mainDisplayClassName}>
-                        {error ? error : counter}
-                    </CounterDisplayMainValue>
-                    <div className={s.currentSetContainer}>
-                        <div className={s.currentSet}>Current max value: {maxValue}</div>
-                        <div className={s.currentSet}>Current start value: {minValue}</div>
-                    </div>
-                </CounterDisplay>
-                <div className={s.buttonContainer}>
+            <MainBoardWrapper>
+                <MainDisplay mainValue={counter} error={error} value1={maxValue} value2={minValue} value1Label={"max"}
+                             value2Label={"start"} finish={counter === maxValue}/>
+                <ControlsWrapper>
                     <Button disabled={counter === maxValue || Boolean(error)}
                             name={"inc"}
                             callback={incrementCounter}
@@ -96,8 +88,8 @@ function App() {
                             name={"set"}
                             callback={setLimitsHandler}
                             indicatorValue={counter}/>
-                </div>
-            </div>
+                </ControlsWrapper>
+            </MainBoardWrapper>
         </CounterWrapper>
 
     )
@@ -116,43 +108,30 @@ const CounterWrapper = styled.div`
 
 `
 
-const CounterDisplay = styled.div`
-  position: relative;
-  background-color: #50717b; /*for compatibility with older browsers*/
-  background-image: linear-gradient(#50717b, #8ecccc);
-  /*background-color: #8ecccc;*/
-  height: 100px;
+const MainBoardWrapper = styled.div`
+  z-index: 3;
+  width: 300px;
+  height: 200px;
+  border: 3px solid #8ecccc;
+  padding: 10px;
   border-radius: 10px;
-  font-size: 50px;
-  text-align: center;
-  color: #3a4042;
-  font-weight: bold;
-  /*border: 1px solid red;*/
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 1px 4px -2px #333;
-  justify-content: flex-end;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: calc(100% - 4px);
-    height: 50%;
-    /*width: 300px;*/
-    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
-    border-radius: 10px 10px 0 0;
-  }
+  background-color: #3a4042;
+  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 `
 
-const CounterDisplayMainValue = styled.div`
-  //border: 1px solid yellow;
-  height: 100%;
+const ControlsWrapper = styled.div`
+  border: 3px solid #8ecccc;
+  margin-top: 20px;
+  border-radius: 10px;
+  height: 40%;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
 `
-
 
 export default App;

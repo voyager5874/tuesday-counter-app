@@ -26,7 +26,8 @@ export const LimitValueInput = (props: LimitValueInput) => {
     // }
     //use contentEditable to allow direct input in div, with tabIndex={-1} you can listen keyDown event
     //how to make flux cycle using div as input field?
-    //I could keep value to set to Counter here with useState hook and save it to upper localState by pressing "Set" button
+    //I could keep the value for Counter here with useState hook and save it to upper localState by pressing "Set" button but "Set" is in another component
+    //so there is no way to get the value on click event(?)
     //would it be more logical than crating temporal local state in above component?
 
 
@@ -82,7 +83,9 @@ const LimitValueControlButtons = styled.button`
   width: 15px;
   height: 15px;
   border-radius: 3px;
-  box-shadow: 2px 2px #212121;
+  //box-shadow: 2px 2px #212121;
+  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+
   font-weight: bold;
   padding: 0;
 
@@ -131,6 +134,7 @@ const LimitInputField = styled.div`
   justify-content: center;
   //align-items: center; //couldn't position pseudo-element in the right place so I went with some workarounds
   outline: none;
+  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;;
 
   &::after { //"::" - pseudo element, ":" - pseudo-class
     content: '';
