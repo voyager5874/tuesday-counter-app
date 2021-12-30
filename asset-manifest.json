@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/tuesday-counter-app/static/css/main.876f6931.chunk.css",
-    "main.js": "/tuesday-counter-app/static/js/main.a9377e74.chunk.js",
-    "main.js.map": "/tuesday-counter-app/static/js/main.a9377e74.chunk.js.map",
-    "runtime-main.js": "/tuesday-counter-app/static/js/runtime-main.9eeae95a.js",
-    "runtime-main.js.map": "/tuesday-counter-app/static/js/runtime-main.9eeae95a.js.map",
-    "static/js/2.4758445e.chunk.js": "/tuesday-counter-app/static/js/2.4758445e.chunk.js",
-    "static/js/2.4758445e.chunk.js.map": "/tuesday-counter-app/static/js/2.4758445e.chunk.js.map",
-    "static/js/3.72d3132f.chunk.js": "/tuesday-counter-app/static/js/3.72d3132f.chunk.js",
-    "static/js/3.72d3132f.chunk.js.map": "/tuesday-counter-app/static/js/3.72d3132f.chunk.js.map",
+    "main.css": "/tuesday-counter-app/static/css/main.6a37bf56.chunk.css",
+    "main.js": "/tuesday-counter-app/static/js/main.b401bb5a.chunk.js",
+    "main.js.map": "/tuesday-counter-app/static/js/main.b401bb5a.chunk.js.map",
+    "runtime-main.js": "/tuesday-counter-app/static/js/runtime-main.e80d6475.js",
+    "runtime-main.js.map": "/tuesday-counter-app/static/js/runtime-main.e80d6475.js.map",
+    "static/js/2.2655bb75.chunk.js": "/tuesday-counter-app/static/js/2.2655bb75.chunk.js",
+    "static/js/2.2655bb75.chunk.js.map": "/tuesday-counter-app/static/js/2.2655bb75.chunk.js.map",
+    "static/js/3.51caabba.chunk.js": "/tuesday-counter-app/static/js/3.51caabba.chunk.js",
+    "static/js/3.51caabba.chunk.js.map": "/tuesday-counter-app/static/js/3.51caabba.chunk.js.map",
     "index.html": "/tuesday-counter-app/index.html",
-    "static/css/main.876f6931.chunk.css.map": "/tuesday-counter-app/static/css/main.876f6931.chunk.css.map",
-    "static/js/2.4758445e.chunk.js.LICENSE.txt": "/tuesday-counter-app/static/js/2.4758445e.chunk.js.LICENSE.txt"
+    "static/css/main.6a37bf56.chunk.css.map": "/tuesday-counter-app/static/css/main.6a37bf56.chunk.css.map",
+    "static/js/2.2655bb75.chunk.js.LICENSE.txt": "/tuesday-counter-app/static/js/2.2655bb75.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.9eeae95a.js",
-    "static/js/2.4758445e.chunk.js",
-    "static/css/main.876f6931.chunk.css",
-    "static/js/main.a9377e74.chunk.js"
+    "static/js/runtime-main.e80d6475.js",
+    "static/js/2.2655bb75.chunk.js",
+    "static/css/main.6a37bf56.chunk.css",
+    "static/js/main.b401bb5a.chunk.js"
   ]
 }
