@@ -1,104 +1,128 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useReducer} from 'react';
 import './App.css';
-import {MainDisplay} from "./MainDisplay";
-import {Button} from "./Button";
-import {Settings} from "./Settings";
+import {MainDisplay} from "./components/MainDisplay";
+import {Button} from "./components/Button";
+import {Settings} from "./components/Settings";
 import styled from "styled-components";
+import {
+    counterActionsReducer,
+    applySettingsAC,
+    setErrorAC,
+    showSettingsAC,
+    resetCounterAC,
+    hideSettingsAC,
+    incrementCounterAC,
+    getStateFromStorageAC,
+    getMaxFromUserAC,
+    getMinFromUserAC
+} from "./state/counterActionsReducer";
 
 function App() {
 
-
-    const [tempLimitsValues, setTempLimitsValues] = useState<Array<number>>([0, 0])
-
-    const [minValue, setMinValue] = useState<number>(0)
-    const [maxValue, setMaxValue] = useState<number>(5)
-
-    const [counter, setCounter] = useState<number>(minValue)
-    const [error, setError] = useState('')
-    const [paramsVisible, setParamsVisible] = useState(false)
-
+    const [counterState, counterActionsDispatch] = useReducer(counterActionsReducer, {
+        counterValue: 0,
+        maxValue: 1,
+        minValue: 0,
+        error: '',
+        settingsVisible: false,
+        maxToBeSet: 0,
+        minToBeSet: 0
+    })
 
     useEffect(() => {
-        debugger
-        let maxAsString = localStorage.getItem('maxValue')
-        if (maxAsString) {
-            setMaxValue(JSON.parse(maxAsString))
-        }
-        let minAsString = localStorage.getItem('minValue')
-        if (minAsString) {
-            setMinValue(JSON.parse(minAsString))
-        }
-        let counterValueAsString = localStorage.getItem('counterValue')
-        if (counterValueAsString) {
-            setCounter(JSON.parse(counterValueAsString))
-        }
-
+        // debugger
+        counterActionsDispatch(getStateFromStorageAC())
     }, [])
 
     const incrementCounter = () => {
-        debugger
-        if (!paramsVisible && counter < maxValue) {
-            setError('')
-            setCounter(counter + 1)
+        // debugger
+        if (!counterState.settingsVisible && counterState.counterValue < counterState.maxValue) {
+            counterActionsDispatch(setErrorAC(''))
+            counterActionsDispatch(incrementCounterAC())
         }
-        if (paramsVisible) {
-            setError('set your counter')
+        if (counterState.settingsVisible) {
+            counterActionsDispatch(setErrorAC('set your counter'))
+            setTimeout(() => counterActionsDispatch(setErrorAC('')), 1500)
         }
     }
 
     const resetCounter = () => {
-        setCounter(minValue)
+        counterActionsDispatch(resetCounterAC())
     }
-    const setLimitsHandler = () => {
-        if (paramsVisible) {
-            setMaxValue(tempLimitsValues[0])
-            setMinValue(tempLimitsValues[1])
-            setError('')
-            setParamsVisible(false)
-            resetCounter()
+
+    const toggleSettingsVisibility = () => {
+        if (counterState.settingsVisible) {
+            // counterActionsDispatch(applySettingsAC(counterState.maxToBeSet, counterState.minToBeSet)) //could be done without parameters (copy from state inside reducer)
+            counterActionsDispatch(applySettingsAC()) //could be done without parameters (copy from state inside reducer)
+            counterActionsDispatch(hideSettingsAC())
+            counterActionsDispatch(resetCounterAC())
         } else {
-            setParamsVisible(true)
+            counterActionsDispatch(showSettingsAC())
         }
-    }
-    const changeTempLocalState = (max: number, min: number) => {
-        setTempLimitsValues([max, min])
     }
 
     useEffect(() => {
-        localStorage.setItem('maxValue', JSON.stringify(maxValue))
-        localStorage.setItem('minValue', JSON.stringify(minValue))
-        // resetCounter()
-        localStorage.setItem('counterValue', JSON.stringify(counter))
-    }, [maxValue, minValue, counter])
+        // debugger
+        localStorage.setItem('maxValue', JSON.stringify(counterState.maxValue))
+        localStorage.setItem('minValue', JSON.stringify(counterState.minValue))
+        localStorage.setItem('counterValue', JSON.stringify(counterState.counterValue))
+    }, [counterState.maxValue, counterState.minValue, counterState.counterValue])
+
+    const validateNewMax = (newMax: number) => {
+        if (newMax > counterState.minToBeSet && newMax > 0) {
+            counterActionsDispatch(setErrorAC(''))
+            counterActionsDispatch(getMaxFromUserAC(newMax))
+            // debugger
+
+        } else {
+            newMax <= counterState.minToBeSet ? counterActionsDispatch(setErrorAC('max must be above the min'))
+                : counterActionsDispatch(setErrorAC('negative values not allowed'))
+            setTimeout(() => counterActionsDispatch(setErrorAC('')), 1000)
+        }
+    }
+
+    const validateNewMin = (newMin: number) => {
+        if (newMin < counterState.maxToBeSet && newMin >= 0) {
+            counterActionsDispatch(setErrorAC(''))
+            counterActionsDispatch(getMinFromUserAC(newMin))
+
+        } else {
+            newMin >= counterState.maxToBeSet ? counterActionsDispatch(setErrorAC('min must be less than the max'))
+                : counterActionsDispatch(setErrorAC('negative values not allowed'))
+            setTimeout(() => counterActionsDispatch(setErrorAC('')), 1000)
+        }
+    }
 
 
     return (
         <CounterWrapper>
-            <Settings visible={paramsVisible}
-                      error={error}
-                      maxValue={maxValue}
-                      minValue={minValue}
-                      limitsChangedCallback={(max, min) => {
-                          changeTempLocalState(max, min)
-                      }}
-                      setErrorCallback={setError}
+            <Settings visible={counterState.settingsVisible}
+                      maxValue={counterState.maxToBeSet}
+                      minValue={counterState.minToBeSet}
+                      validateNewMax={validateNewMax}
+                      validateNewMin={validateNewMin}
+
+
             />
             <MainBoardWrapper>
-                <MainDisplay mainValue={counter} error={error} value1={maxValue} value2={minValue} value1Label={"max"}
-                             value2Label={"start"} finish={counter === maxValue}/>
+                <MainDisplay mainValue={counterState.counterValue} error={counterState.error}
+                             value1={counterState.maxValue} value2={counterState.minValue} value1Label={"max"}
+                             value2Label={"start"} finish={counterState.counterValue === counterState.maxValue}/>
                 <ControlsWrapper>
-                    <Button disabled={counter === maxValue || Boolean(error)}
-                            name={"inc"}
-                            callback={incrementCounter}
-                            indicatorValue={counter}/>
-                    <Button disabled={counter === minValue || Boolean(error)}
-                            name={"reset"}
-                            callback={resetCounter}
-                            indicatorValue={counter}/>
-                    <Button disabled={false}
+                    <Button
+                        disabled={counterState.counterValue === counterState.maxValue || Boolean(counterState.error)}
+                        name={"inc"}
+                        callback={incrementCounter}
+                    />
+                    <Button
+                        disabled={counterState.counterValue === counterState.minValue || Boolean(counterState.error)}
+                        name={"reset"}
+                        callback={resetCounter}
+                    />
+                    <Button disabled={Boolean(counterState.error)}
                             name={"set"}
-                            callback={setLimitsHandler}
-                            indicatorValue={counter}/>
+                            callback={toggleSettingsVisibility}
+                    />
                 </ControlsWrapper>
             </MainBoardWrapper>
         </CounterWrapper>

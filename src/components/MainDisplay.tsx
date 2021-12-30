@@ -44,7 +44,12 @@ const Display = styled.div<DisplayProps>`
   /*border: 1px solid red;*/
   display: flex;
   flex-direction: column;
-  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset,
+  rgba(44, 187, 99, .25) 0 1px 2px,
+  rgba(44, 187, 99, .25) 0 2px 4px,
+  rgba(44, 187, 99, .25) 0 4px 8px,
+  rgba(44, 187, 99, .25) 0 8px 16px,
+  rgba(44, 187, 99, .25) 0 16px 32px;
   justify-content: flex-end;
 
   &::after {
@@ -55,7 +60,8 @@ const Display = styled.div<DisplayProps>`
     width: calc(100% - 4px);
     height: 50%;
     /*width: 300px;*/
-    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+    background: linear-gradient(rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.2));
     border-radius: 10px 10px 0 0;
   }
 `

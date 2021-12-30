@@ -2,34 +2,21 @@ import React from 'react';
 import styled from "styled-components";
 
 
-type LimitValueInput = {
+type LimitValueInputType = {
     label: string
     currentValue: number
-    // compareWithValue: number
-    callback: (newValue: number) => void
+    sendValueCallback: (newValue: number) => void
 }
 
-
-export const LimitValueInput = (props: LimitValueInput) => {
-
+export const LimitValueInput = (props: LimitValueInputType) => {
+    // debugger
     const plusClickHandler = () => {
-        props.callback(props.currentValue + 1)
+        props.sendValueCallback(props.currentValue + 1)
     }
 
     const minusClickHandler = () => {
-        props.callback(props.currentValue - 1)
+        props.sendValueCallback(props.currentValue - 1)
     }
-
-    // const directInputHandler = (e: React.FormEvent<HTMLDivElement>) => {
-    //     debugger
-    //     props.callback(Number(e.currentTarget.innerText))
-    // }
-    //use contentEditable to allow direct input in div, with tabIndex={-1} you can listen keyDown event
-    //how to make flux cycle using div as input field?
-    //I could keep the value for Counter here with useState hook and save it to upper localState by pressing "Set" button but "Set" is in another component
-    //so there is no way to get the value on click event(?)
-    //would it be more logical than crating temporal local state in above component?
-
 
     return (
         <LimitValueSetContainer>
@@ -46,7 +33,8 @@ export const LimitValueInput = (props: LimitValueInput) => {
             <LimitValueControlsWrapper>
                 <LimitValueControlButtons
                     onClick={plusClickHandler}>+</LimitValueControlButtons>
-                <LimitValueControlButtons onClick={minusClickHandler}>-</LimitValueControlButtons>
+                <LimitValueControlButtons
+                    onClick={minusClickHandler}>-</LimitValueControlButtons>
             </LimitValueControlsWrapper>
         </LimitValueSetContainer>
     );
@@ -84,7 +72,12 @@ const LimitValueControlButtons = styled.button`
   height: 15px;
   border-radius: 3px;
   //box-shadow: 2px 2px #212121;
-  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset,
+  rgba(44, 187, 99, .25) 0 1px 2px,
+  rgba(44, 187, 99, .25) 0 2px 4px,
+  rgba(44, 187, 99, .25) 0 4px 8px,
+  rgba(44, 187, 99, .25) 0 8px 16px,
+  rgba(44, 187, 99, .25) 0 16px 32px;
 
   font-weight: bold;
   padding: 0;
@@ -134,7 +127,12 @@ const LimitInputField = styled.div`
   justify-content: center;
   //align-items: center; //couldn't position pseudo-element in the right place so I went with some workarounds
   outline: none;
-  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+  box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset,
+  rgba(44, 187, 99, .25) 0 1px 2px,
+  rgba(44, 187, 99, .25) 0 2px 4px,
+  rgba(44, 187, 99, .25) 0 4px 8px,
+  rgba(44, 187, 99, .25) 0 8px 16px,
+  rgba(44, 187, 99, .25) 0 16px 32px;
 
   &::after { //"::" - pseudo element, ":" - pseudo-class
     content: '';
@@ -143,7 +141,8 @@ const LimitInputField = styled.div`
     //left: 1px;
     width: 60px;
     height: 18px;
-    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+    background: linear-gradient(rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.2));
     border-radius: 5px 5px 0 0;
   }
 `

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 type ButtonType = {
     name: string
-    indicatorValue: number
+    // indicatorValue: number
     disabled: boolean
     callback: () => void
 }
